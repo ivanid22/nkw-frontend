@@ -1,14 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import reducers from './reducers/index';
 import './index.css';
 import App from './App';
+import { startSignUp } from './actions/auth';
 import reportWebVitals from './reportWebVitals';
 
+const store = createStore(reducers, applyMiddleware(thunk));
+
+store.subscribe(() => {
+  store.getState();
+});
+
+console.log('hey');
+
+window.store = store;
+
+store.dispatch(startSignUp({
+  email: 'test1@test.com',
+  password: 'password12',
+  passwordConfirmation: 'password1',
+}));
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

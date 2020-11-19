@@ -2,13 +2,15 @@ export const AuthActionType = {
   SIGN_IN: 'SIGN_IN',
   SIGN_OUT: 'SIGN_OUT',
   SIGN_UP: 'SIGN_UP',
+  SIGN_IN_FAILED: 'SIGN_IN_FAILED',
 };
 
 const initialState = {
   client: '',
   accessToken: '',
   uid: '',
-  signedIn: false,
+  status: 'idle',
+  error: '',
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,10 +21,17 @@ const authReducer = (state = initialState, action) => {
         client,
         accessToken,
         uid,
+        status: 'signedIn',
         signedIn: true,
       };
     case AuthActionType.SIGN_OUT:
       return initialState;
+    case AuthActionType.SIGN_IN_FAILED:
+      return {
+        ...initialState,
+        status: 'signInFailed',
+        error: action.error,
+      };
     default:
       return state;
   }
