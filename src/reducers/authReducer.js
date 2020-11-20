@@ -3,6 +3,7 @@ export const AuthActionType = {
   SIGN_OUT: 'SIGN_OUT',
   SIGN_UP: 'SIGN_UP',
   SIGN_IN_FAILED: 'SIGN_IN_FAILED',
+  SIGN_UP_FAILED: 'SIGN_UP_FAILED',
 };
 
 const initialState = {
@@ -30,6 +31,12 @@ const authReducer = (state = initialState, action) => {
       return {
         ...initialState,
         status: 'signInFailed',
+        error: action.error,
+      };
+    case AuthActionType.SIGN_UP_FAILED:
+      return {
+        ...initialState,
+        status: 'signUpFailed',
         error: action.error,
       };
     default:
