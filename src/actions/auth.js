@@ -42,7 +42,6 @@ export const startSignIn = data => dispatch => {
     if (response.status === 401) dispatch(signInFailed());
     else dispatch(signIn(processSignInResponse(response)));
   }).catch(error => {
-    console.log(error);
     if (error.response.status === 401) dispatch(signInFailed('Invalid login credentials. Please try again.'));
   });
 };
@@ -65,7 +64,6 @@ export const startSignUp = data => dispatch => {
 
 export const startSignOut = data => dispatch => {
   const { uid, client, accessToken } = data;
-  console.log(uid, client, accessToken);
   axios({
     method: 'delete',
     url: `${API_URL}/auth/sign_out`,
