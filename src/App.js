@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import SignInView from './containers/SignInView/SignInView';
+import RouteNotFoundView from './components/RouteNotFoundView/RouteNotFoundView';
 
 function App() {
   return (
@@ -10,11 +12,8 @@ function App() {
           <Route exact path="/auth/sign_in">
             <SignInView />
           </Route>
-          <Route exact path="/auth/sign_up">
-            <SignUpView />
-          </Route>
           <Route exact path="/">
-            <PostingsIndexView />
+            <RouteNotFoundView />
           </Route>
           <Route>
             <RouteNotFoundView />
