@@ -1,0 +1,51 @@
+@import '../../styles/common';
+
+.bgContainer {
+  background-image: url('../../assets/empty-sports-ground.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content {
+  background: rgba($color: #fff, $alpha: 0.8);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.signUpForm {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textField {
+  border-radius: 1px;
+}
+
+.controlsWidth {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.controlsWidth > * {
+  margin-bottom: 2em;
+}
+
+.formControls {
+  width: 100%;
+}

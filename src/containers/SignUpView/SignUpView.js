@@ -6,9 +6,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { startSignIn } from '../../actions/auth';
+import { startSignUp } from '../../actions/auth';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
-import styles from './SignInView.module.scss';
+import styles from './SignUpView.module.scss';
 
 const buttonStyles = makeStyles({
   root: {
@@ -38,7 +38,7 @@ const textfieldStyles = makeStyles({
   },
 });
 
-const SignInView = ({ authState, dispatchLogin }) => {
+const SignUpView = ({ authState, dispatchLogin }) => {
   const history = useHistory();
   const buttonClasses = buttonStyles();
   const textFieldClasses = textfieldStyles();
@@ -46,10 +46,11 @@ const SignInView = ({ authState, dispatchLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    password_confirmation: '',
   });
 
-  const signingIn = () => authState.status === 'signingIn';
-  const idle = () => ((authState.status === 'signInFailed') || (authState.status === 'idle'));
+  const signingUp = () => authState.status === 'signingUp';
+  const idle = () => ((authState.status === 'signUpFailed') || (authState.status === 'idle'));
   const renderError = () => (
     authState.error
       ? (
@@ -59,11 +60,12 @@ const SignInView = ({ authState, dispatchLogin }) => {
       ) : null
   );
 
-  const submitLogin = e => {
+  const submitSignUp = e => {
     e.preventDefault();
     dispatchLogin({
       email: formData.email,
       password: formData.password,
+      password_confirmation: formData.password_confirmation,
     });
   };
 
@@ -76,22 +78,23 @@ const SignInView = ({ authState, dispatchLogin }) => {
       <div className={styles.bgContainer}>
         <div className={styles.content}>
           <div className={styles.sectionHeading}>
-            <Typography variant="h2">Sign in</Typography>
-            <Typography variant="subtitle1">Hi there! Please sign in to continue</Typography>
+            <Typography variant="h2">Sign up</Typography>
+            <Typography variant="subtitle1">Welcome to NKW!</Typography>
           </div>
-          <form className={styles.formControls} onSubmit={submitLogin}>
+          <form className={styles.formControls} onSubmit={submitSignUp}>
             <div className={styles.controlsWidth}>
               <TextField type="email" required className={textFieldClasses.root} variant="outlined" label="Email" placeholder="your@email.com" onChange={e => setFormData({ ...formData, email: e.target.value })} />
               <TextField type="password" required className={textFieldClasses.root} variant="outlined" label="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
-              <Button type="submit" className={buttonClasses.root} disabled={signingIn()}>
+              <TextField type="password" required className={textFieldClasses.root} variant="outlined" label="Confirm password" onChange={e => setFormData({ ...formData, password_confirmation: e.target.value })} />
+              <Button type="submit" className={buttonClasses.root} disabled={signingUp()}>
                 { idle() ? <Typography variant="button"> Sign in </Typography> : <CircularProgress /> }
               </Button>
               { renderError() }
             </div>
           </form>
           <Typography variant="body1" color="textSecondary">
-            Don&apos;t have an account?
-            <Link to="/sign_up">Sign up</Link>
+            Already have an account?
+            <Link to="/sign_in">Sign in</Link>
           </Typography>
         </div>
       </div>
@@ -99,7 +102,7 @@ const SignInView = ({ authState, dispatchLogin }) => {
   );
 };
 
-SignInView.propTypes = {
+SignUpView.propTypes = {
   authState: PropTypes.objectOf(PropTypes.string).isRequired,
   dispatchLogin: PropTypes.func.isRequired,
 };
@@ -109,7 +112,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchLogin: data => dispatch(startSignIn(data)),
+  dispatchLogin: data => dispatch(startSignUp(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInView);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpView);

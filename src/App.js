@@ -3,14 +3,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import SignInView from './containers/SignInView/SignInView';
 import RouteNotFoundView from './components/RouteNotFoundView/RouteNotFoundView';
+import SignUpView from './containers/SignUpView/SignUpView';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/auth/sign_in">
+          <Route exact path="/sign_in">
             <SignInView />
+          </Route>
+          <Route exact path="/sign_up">
+            <SignUpView />
           </Route>
           <Route exact path="/">
             <RouteNotFoundView />
