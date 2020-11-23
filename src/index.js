@@ -10,9 +10,9 @@ import reportWebVitals from './reportWebVitals';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-store.subscribe(() => {
+/* store.subscribe(() => {
   console.log(store.getState());
-});
+}); */
 
 window.store = store;
 

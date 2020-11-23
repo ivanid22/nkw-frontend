@@ -1,30 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Typography, TextField, Button } from '@material-ui/core';
+import {
+  Typography, TextField, Button, CircularProgress,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startSignIn } from '../../actions/auth';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import styles from './SignInView.module.scss';
 
-const useStyles = makeStyles({
-  button: {
-    padding: '5px 10px',
-    backgroundColor: 'orange',
+const buttonStyles = makeStyles({
+  root: {
+    padding: '10px 30px',
+    backgroundColor: '#ff5617',
     color: 'white',
-    borderRadius: '5px',
+    borderRadius: '25px',
+    maxWidth: '220px',
+    alignSelf: 'center',
+
+    '&:hover': {
+      backgroundColor: '#b03000',
+    },
+  },
+});
+
+const textfieldStyles = makeStyles({
+  root: {
+    maxWidth: '480px',
+    borderRadius: '20px',
+    border: 'none',
+    marginBottom: '1em',
+
+    '& fieldset': {
+      borderRadius: '30px',
+    },
   },
 });
 
 const SignInView = ({ authState, dispatchLogin }) => {
   const history = useHistory();
-  const materialStyles = useStyles();
+  const buttonClasses = buttonStyles();
+  const textFieldClasses = textfieldStyles();
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    // if (authState.status === 'signedIn') history.push('/ready');
+    console.log(authState);
+    console.log((authState.status === 'signedIn'));
+  });
+
+  const signingIn = () => authState.status === 'signingIn';
+  const idle = () => ((authState.status === 'signInFailed') || (authState.status === 'idle'));
+  const renderError = () => (
+    authState.error
+      ? (
+        <Typography variant="subtitle2" color="error">
+          { authState.error }
+        </Typography>
+      ) : null
+  );
 
   const submitLogin = e => {
     e.preventDefault();
@@ -35,25 +74,34 @@ const SignInView = ({ authState, dispatchLogin }) => {
   };
 
   console.log(history);
-  console.log(authState);
+
+  useEffect(() => {
+    if (authState.status === 'signedIn') history.push('/');
+    console.log(authState);
+  });
 
   return (
     <LayoutContainer>
       <div className={styles.bgContainer}>
         <div className={styles.content}>
-          <form className={styles.signInForm} onSubmit={submitLogin}>
-            <div className={styles.sectionHeading}>
-              <Typography variant="h2">Sign in</Typography>
-              <Typography variant="subtitle1">Hi there! Please sign in to continue</Typography>
-            </div>
-            <div className={styles.formControls}>
-              <TextField type="email" variant="outlined" label="Email" placeholder="your@email.com" onChange={e => setFormData({ ...formData, email: e.target.value })} />
-              <TextField type="password" variant="outlined" label="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
-              <Button type="submit" className={materialStyles.button}>
-                <Typography variant="button"> Sign in </Typography>
+          <div className={styles.sectionHeading}>
+            <Typography variant="h2">Sign in</Typography>
+            <Typography variant="subtitle1">Hi there! Please sign in to continue</Typography>
+          </div>
+          <form className={styles.formControls} onSubmit={submitLogin}>
+            <div className={styles.controlsWidth}>
+              <TextField type="email" required className={textFieldClasses.root} variant="outlined" label="Email" placeholder="your@email.com" onChange={e => setFormData({ ...formData, email: e.target.value })} />
+              <TextField type="password" required className={textFieldClasses.root} variant="outlined" label="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
+              <Button type="submit" className={buttonClasses.root} disabled={signingIn()}>
+                { idle() ? <Typography variant="button"> Sign in </Typography> : <CircularProgress /> }
               </Button>
+              { renderError() }
             </div>
           </form>
+          <Typography variant="body1" color="textSecondary">
+            Don&apos;t have an account?
+            <Link to="/sign_up">Sign up</Link>
+          </Typography>
         </div>
       </div>
     </LayoutContainer>

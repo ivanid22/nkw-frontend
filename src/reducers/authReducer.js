@@ -25,7 +25,6 @@ const authReducer = (state = initialState, action) => {
         accessToken,
         uid,
         status: 'signedIn',
-        signedIn: true,
       };
     case AuthActionType.SIGN_OUT:
       return initialState;
@@ -40,6 +39,18 @@ const authReducer = (state = initialState, action) => {
         ...initialState,
         status: 'signUpFailed',
         error: action.error,
+      };
+    case AuthActionType.SIGNING_IN:
+      return {
+        ...state,
+        status: 'signingIn',
+        error: '',
+      };
+    case AuthActionType.SIGNING_UP:
+      return {
+        ...state,
+        status: 'signingUp',
+        error: '',
       };
     default:
       return state;
