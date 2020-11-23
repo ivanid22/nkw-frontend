@@ -10,6 +10,10 @@ const signIn = data => ({
   uid: data.uid,
 });
 
+const signingIn = () => ({
+  type: AuthActionType.SIGNING_IN,
+});
+
 const signOut = () => ({
   type: AuthActionType.SIGN_OUT,
 });
@@ -17,6 +21,10 @@ const signOut = () => ({
 const signInFailed = error => ({
   type: AuthActionType.SIGN_IN_FAILED,
   error,
+});
+
+const signingUp = () => ({
+  type: AuthActionType.SIGNING_UP,
 });
 
 const signUpFailed = error => ({
@@ -31,6 +39,7 @@ const processSignInResponse = response => ({
 });
 
 export const startSignIn = data => dispatch => {
+  dispatch(signingIn());
   axios({
     method: 'post',
     url: `${API_URL}/auth/sign_in`,
@@ -47,13 +56,14 @@ export const startSignIn = data => dispatch => {
 };
 
 export const startSignUp = data => dispatch => {
+  dispatch(signingUp());
   axios({
     method: 'post',
     url: `${API_URL}/auth`,
     data: {
       email: data.email,
       password: data.password,
-      password_confirmation: data.password_onfirmation,
+      password_confirmation: data.password_confirmation,
     },
   }).then(response => {
     dispatch(signIn(processSignInResponse(response)));

@@ -2,8 +2,10 @@ export const AuthActionType = {
   SIGN_IN: 'SIGN_IN',
   SIGN_OUT: 'SIGN_OUT',
   SIGN_UP: 'SIGN_UP',
+  SIGNING_UP: 'SIGNING_UP',
   SIGN_IN_FAILED: 'SIGN_IN_FAILED',
   SIGN_UP_FAILED: 'SIGN_UP_FAILED',
+  SIGNING_IN: 'SIGNING_IN',
 };
 
 const initialState = {
