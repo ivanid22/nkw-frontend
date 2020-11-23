@@ -1,0 +1,27 @@
+.bgContainer {
+  background-image: url('../../assets/empty-sports-ground.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content {
+  background: rgba($color: #fff, $alpha: 0.8);
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  background-color: sandybrown;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+}

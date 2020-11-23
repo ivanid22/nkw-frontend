@@ -6,7 +6,6 @@ import { Container } from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     margin: '0 auto',
-    background: 'lightgray',
     minHeight: '100vh',
   },
 });
