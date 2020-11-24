@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
+import ApplicationBar from '../ApplicationBar/ApplicationBar';
 
 const useStyles = makeStyles({
   root: {
@@ -15,6 +16,7 @@ const LayoutContainer = ({ children }) => {
 
   return (
     <Container maxWidth="md" className={styles.root}>
+      <ApplicationBar />
       { children }
     </Container>
   );
