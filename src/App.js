@@ -7,7 +7,7 @@ import SignUpView from './containers/SignUpView/SignUpView';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id="appContainer">
       <Router>
         <Switch>
           <Route exact path="/sign_in">

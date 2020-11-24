@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { AppBar, IconButton, Toolbar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -20,7 +21,7 @@ const toolbarStyles = makeStyles({
   },
 });
 
-const ApplicationBar = () => {
+const ApplicationBar = ({ menuOpen }) => {
   const containerClasses = containerStyles();
   const toolbarClasses = toolbarStyles();
 
@@ -32,7 +33,7 @@ const ApplicationBar = () => {
   const renderBar = () => (
     <AppBar className={containerClasses.root} position="static">
       <Toolbar className={toolbarClasses.root}>
-        <IconButton edge="start" color="black" aria-label="menu">
+        <IconButton edge="start" color="black" aria-label="menu" onClick={menuOpen}>
           <MenuIcon />
         </IconButton>
         <IconButton edge="end" color="black">
@@ -47,6 +48,10 @@ const ApplicationBar = () => {
       { shouldRender() ? renderBar() : null }
     </div>
   );
+};
+
+ApplicationBar.propTypes = {
+  menuOpen: PropTypes.func.isRequired,
 };
 
 export default ApplicationBar;
