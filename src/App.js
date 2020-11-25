@@ -4,6 +4,7 @@ import './App.css';
 import SignInView from './containers/SignInView/SignInView';
 import RouteNotFoundView from './components/RouteNotFoundView/RouteNotFoundView';
 import SignUpView from './containers/SignUpView/SignUpView';
+import PostingsView from './containers/PostingsView/PostingsView';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <SignUpView />
           </Route>
           <Route exact path="/">
-            <RouteNotFoundView />
+            <PostingsView />
           </Route>
           <Route>
             <RouteNotFoundView />
