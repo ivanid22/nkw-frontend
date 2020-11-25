@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AuthActionType } from '../reducers/authReducer';
+import { startFetchPostings } from './postings';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -14,11 +15,11 @@ const signingIn = () => ({
   type: AuthActionType.SIGNING_IN,
 });
 
-const signOut = () => ({
+export const signOut = () => ({
   type: AuthActionType.SIGN_OUT,
 });
 
-const signInFailed = error => ({
+export const signInFailed = error => ({
   type: AuthActionType.SIGN_IN_FAILED,
   error,
 });
@@ -49,7 +50,10 @@ export const startSignIn = data => dispatch => {
     },
   }).then(response => {
     if (response.status === 401) dispatch(signInFailed());
-    else dispatch(signIn(processSignInResponse(response)));
+    else {
+      dispatch(signIn(processSignInResponse(response)));
+      dispatch(startFetchPostings());
+    }
   }).catch(error => {
     if (error.response.status === 401) dispatch(signInFailed('Invalid login credentials. Please try again.'));
   });
@@ -67,6 +71,7 @@ export const startSignUp = data => dispatch => {
     },
   }).then(response => {
     dispatch(signIn(processSignInResponse(response)));
+    dispatch(startFetchPostings());
   }).catch(error => {
     dispatch(signUpFailed(error.response.data.errors.full_messages.join(', ')));
   });
