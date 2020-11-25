@@ -4,7 +4,7 @@ import { startFetchPostings } from './postings';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const signIn = data => ({
+export const signIn = data => ({
   type: AuthActionType.SIGN_IN,
   accessToken: data.accessToken,
   client: data.client,

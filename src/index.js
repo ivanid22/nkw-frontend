@@ -6,13 +6,35 @@ import { Provider } from 'react-redux';
 import reducers from './reducers/index';
 import './index.css';
 import App from './App';
+import { signIn } from './actions/auth';
 import reportWebVitals from './reportWebVitals';
+import { startFetchPostings } from './actions/postings';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-/* store.subscribe(() => {
+const initLocalStorage = () => {
+  const uid = localStorage.getItem('uid');
+  const accessToken = localStorage.getItem('access-token');
+  const client = localStorage.getItem('client');
+  if (uid && accessToken && client) {
+    store.dispatch(signIn({ uid, accessToken, client }));
+    store.dispatch(startFetchPostings());
+  }
+};
+
+const storeAuthTokens = () => {
+  const { auth } = store.getState();
+  localStorage.setItem('uid', auth.uid);
+  localStorage.setItem('access-token', auth.accessToken);
+  localStorage.setItem('client', auth.client);
+};
+
+store.subscribe(() => {
   console.log(store.getState());
-}); */
+  storeAuthTokens();
+});
+
+initLocalStorage();
 
 window.store = store;
 
