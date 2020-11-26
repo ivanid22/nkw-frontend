@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AuthActionType } from '../reducers/authReducer';
+import { startFetchUserProfile } from './applicationState';
 import { startFetchPostings } from './postings';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -52,6 +53,7 @@ export const startSignIn = data => dispatch => {
     if (response.status === 401) dispatch(signInFailed());
     else {
       dispatch(signIn(processSignInResponse(response)));
+      dispatch(startFetchUserProfile());
       dispatch(startFetchPostings());
     }
   }).catch(error => {

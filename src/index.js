@@ -9,6 +9,7 @@ import App from './App';
 import { signIn } from './actions/auth';
 import reportWebVitals from './reportWebVitals';
 import { startFetchPostings } from './actions/postings';
+import { startFetchUserProfile } from './actions/applicationState';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -18,6 +19,7 @@ const initLocalStorage = () => {
   const client = localStorage.getItem('client');
   if (uid && accessToken && client) {
     store.dispatch(signIn({ uid, accessToken, client }));
+    store.dispatch(startFetchUserProfile());
     store.dispatch(startFetchPostings());
   }
 };
