@@ -33,10 +33,10 @@ const ApplicationBar = ({ menuOpen }) => {
   const renderBar = () => (
     <AppBar className={containerClasses.root} position="static">
       <Toolbar className={toolbarClasses.root}>
-        <IconButton edge="start" color="black" aria-label="menu" onClick={menuOpen}>
+        <IconButton edge="start" color="default" aria-label="menu" onClick={menuOpen}>
           <MenuIcon />
         </IconButton>
-        <IconButton edge="end" color="black">
+        <IconButton edge="end" color="default">
           <Search />
         </IconButton>
       </Toolbar>

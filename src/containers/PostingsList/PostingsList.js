@@ -1,7 +1,9 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
 import PropTypes from 'prop-types';
 import PostingsListItem from '../PostingsListItem/PostingsListItem';
+import styles from './PostingsList.module.scss';
 
 const PostingsList = ({ postings }) => {
   const renderPostings = () => postings.map(posting => (
@@ -11,7 +13,7 @@ const PostingsList = ({ postings }) => {
   ));
 
   return (
-    <div>
+    <div className={styles.sliderContainer}>
       <Swiper>
         { renderPostings() }
       </Swiper>

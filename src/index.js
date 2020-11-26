@@ -23,10 +23,12 @@ const initLocalStorage = () => {
 };
 
 const storeAuthTokens = () => {
-  const { auth } = store.getState();
-  localStorage.setItem('uid', auth.uid);
-  localStorage.setItem('access-token', auth.accessToken);
-  localStorage.setItem('client', auth.client);
+  const { uid, accessToken, client } = store.getState().auth;
+  if (uid && accessToken && client) {
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('access-token', accessToken);
+    localStorage.setItem('client', client);
+  }
 };
 
 store.subscribe(() => {
