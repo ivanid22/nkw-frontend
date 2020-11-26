@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import ApplicationBar from '../ApplicationBar/ApplicationBar';
-import DrawerMenu from '../DrawerMenu/DrawerMenu';
+import DrawerMenu from '../../containers/DrawerMenu/DrawerMenu';
 
 const useStyles = makeStyles({
   root: {

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Favorite } from '@material-ui/icons';
 import { IconButton, Typography } from '@material-ui/core';
 import styles from './PostingsListItem.module.scss';
+import defaultPicture from '../../assets/default-posting-picture.png';
 
-const pictureUrl = posting => (posting.picture ? `http://localhost:3000/${posting.picture}` : 'default');
+const pictureUrl = posting => (posting.picture ? `http://localhost:3000/${posting.picture}` : defaultPicture);
 
 const PostingsListItem = ({ posting }) => {
   console.log('posting', posting);
