@@ -1,6 +1,7 @@
 export const ApplicationStateActions = {
   SET_USER_PROFILE: 'SET_USER_PROFILE',
   SET_ACTIVE_NAVIGATION_SLIDE: 'SET_ACTIVE_NAVIGATION_SLIDE',
+  CLEAR_USER_PROFILE: 'CLEAR_USER_PROFILE',
 };
 
 const initialState = {
@@ -14,6 +15,11 @@ const applicationStateReducer = (state = initialState, action) => {
       return {
         ...state,
         userProfile: action.userProfile,
+      };
+    case ApplicationStateActions.CLEAR_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: initialState.userProfile,
       };
     case ApplicationStateActions.SET_ACTIVE_NAVIGATION_SLIDE:
       return {

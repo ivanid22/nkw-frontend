@@ -6,6 +6,10 @@ export const setUserProfile = userProfile => ({
   userProfile,
 });
 
+export const clearUserProfile = () => ({
+  type: ApplicationStateActions.CLEAR_USER_PROFILE,
+});
+
 export const startFetchUserProfile = () => (dispatch, getState) => {
   const { uid, client, accessToken } = getState().auth;
   const apiUrl = process.env.REACT_APP_API_URL;

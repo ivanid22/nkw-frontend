@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import {
   List, ListItem, ListItemIcon, ListItemText, Drawer,
 } from '@material-ui/core';
-import { Favorite, Person } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Favorite, Person, ExitToApp } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import UserAvatar from '../UserAvatar/UserAvatar';
 
 const drawerStyles = makeStyles({
   root: {
@@ -13,7 +16,7 @@ const drawerStyles = makeStyles({
   },
 });
 
-const DrawerMenu = ({ open, onClose }) => {
+const DrawerMenu = ({ open, onClose, userProfile }) => {
   const drawerClasses = drawerStyles();
 
   return (
@@ -32,6 +35,7 @@ const DrawerMenu = ({ open, onClose }) => {
       }}
     >
       <List>
+        { userProfile !== {} ? <UserAvatar userProfile={userProfile} /> : null }
         <ListItem>
           <ListItemIcon>
             <Favorite />
@@ -45,6 +49,15 @@ const DrawerMenu = ({ open, onClose }) => {
           </ListItemIcon>
           <ListItemText> Your postings </ListItemText>
         </ListItem>
+
+        <ListItem>
+          <ListItemIcon>
+            <ExitToApp />
+          </ListItemIcon>
+          <ListItemText>
+            <Link to="/sign_out" style={{ color: 'inherit', textDecoration: 'none' }}>Sign out</Link>
+          </ListItemText>
+        </ListItem>
       </List>
     </Drawer>
   );
@@ -53,6 +66,11 @@ const DrawerMenu = ({ open, onClose }) => {
 DrawerMenu.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  userProfile: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default DrawerMenu;
+const mapStateToProps = state => ({
+  userProfile: state.applicationState.userProfile,
+});
+
+export default connect(mapStateToProps)(DrawerMenu);

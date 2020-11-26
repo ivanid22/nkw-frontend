@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AuthActionType } from '../reducers/authReducer';
-import { startFetchUserProfile } from './applicationState';
+import { clearUserProfile, startFetchUserProfile } from './applicationState';
 import { startFetchPostings } from './postings';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -91,7 +91,9 @@ export const startSignOut = data => dispatch => {
     },
   }).then(() => {
     dispatch(signOut());
+    dispatch(clearUserProfile());
   }).catch(() => {
+    dispatch(clearUserProfile());
     dispatch(signOut());
   });
 };
