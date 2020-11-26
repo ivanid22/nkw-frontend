@@ -1,9 +1,13 @@
 import React from 'react';
+import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
 import PropTypes from 'prop-types';
 import PostingsListItem from '../PostingsListItem/PostingsListItem';
 import styles from './PostingsList.module.scss';
+
+SwiperCore.use([Navigation]);
 
 const PostingsList = ({ postings }) => {
   const renderPostings = () => postings.map(posting => (
@@ -14,7 +18,10 @@ const PostingsList = ({ postings }) => {
 
   return (
     <div className={styles.sliderContainer}>
-      <Swiper>
+      <Swiper
+        spaceBetween={10}
+        navigation
+      >
         { renderPostings() }
       </Swiper>
     </div>

@@ -4,7 +4,7 @@ import { Favorite } from '@material-ui/icons';
 import { IconButton, Typography } from '@material-ui/core';
 import styles from './PostingsListItem.module.scss';
 
-const pictureUrl = posting => (posting.picture ? `localhost:3000/${posting.picture}` : 'default');
+const pictureUrl = posting => (posting.picture ? `http://localhost:3000/${posting.picture}` : 'default');
 
 const PostingsListItem = ({ posting }) => {
   console.log('posting', posting);
@@ -30,7 +30,7 @@ const PostingsListItem = ({ posting }) => {
           </div>
         </div>
         <div className={styles.nameContainer}>
-          <Typography variant="h4">{`$ ${posting.price}`}</Typography>
+          <Typography variant="h4">{`$ ${posting.price ? posting.price : 0}`}</Typography>
           <Typography variant="subtitle1"> Negotiable </Typography>
         </div>
       </div>
