@@ -19,6 +19,17 @@ const drawerStyles = makeStyles({
 const DrawerMenu = ({ open, onClose, userProfile }) => {
   const drawerClasses = drawerStyles();
 
+  const SignoutLink = () => (
+    <ListItem>
+      <ListItemIcon>
+        <ExitToApp />
+      </ListItemIcon>
+      <ListItemText>
+        <Link to="/sign_out" style={{ color: 'inherit', textDecoration: 'none' }}>Sign out</Link>
+      </ListItemText>
+    </ListItem>
+  );
+
   return (
     <Drawer
       open={open}
@@ -50,14 +61,7 @@ const DrawerMenu = ({ open, onClose, userProfile }) => {
           <ListItemText> Your postings </ListItemText>
         </ListItem>
 
-        <ListItem>
-          <ListItemIcon>
-            <ExitToApp />
-          </ListItemIcon>
-          <ListItemText>
-            <Link to="/sign_out" style={{ color: 'inherit', textDecoration: 'none' }}>Sign out</Link>
-          </ListItemText>
-        </ListItem>
+        { userProfile !== {} ? <SignoutLink /> : null }
       </List>
     </Drawer>
   );
