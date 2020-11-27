@@ -6,14 +6,14 @@ import { startCreatePosting } from '../../actions/postings';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import SubmitPostingForm from '../../components/SubmitPostingForm/SubmitPostingForm';
 
-const SubmitPostingView = ({ submitPosting, authStatus }) => {
+const SubmitPostingView = ({ submitPosting, authStatus, submitStatus }) => {
   useEffect(() => {
     if (authStatus !== 'signedIn') useHistory().push('/sign_in');
   });
 
   return (
     <LayoutContainer>
-      <SubmitPostingForm submitPosting={submitPosting} />
+      <SubmitPostingForm submitPosting={submitPosting} submitStatus={submitStatus} />
     </LayoutContainer>
   );
 };
@@ -21,10 +21,12 @@ const SubmitPostingView = ({ submitPosting, authStatus }) => {
 SubmitPostingView.propTypes = {
   submitPosting: PropTypes.func.isRequired,
   authStatus: PropTypes.string.isRequired,
+  submitStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   authStatus: state.auth.status,
+  submitStatus: state.applicationState.createPostingStatus,
 });
 
 const mapDispatchToProps = dispatch => ({

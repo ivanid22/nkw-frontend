@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FormControl,
   TextField,
@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import styles from './SubmitPostingsForm.module.scss';
+import styles from './SubmitPostingForm.module.scss';
 
 const buttonStyles = makeStyles({
   root: {
@@ -37,10 +37,11 @@ const textfieldStyles = makeStyles({
   },
 });
 
-const SubmitPostingForm = ({ submitPosting }) => {
+const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
   const [formData, setFormData] = useState({});
   const textFieldClasses = textfieldStyles();
   const buttonClasses = buttonStyles();
+  const fileInputRef = useRef(null);
 
   const onSubmit = event => {
     event.preventDefault();
@@ -50,22 +51,15 @@ const SubmitPostingForm = ({ submitPosting }) => {
     data.append('posting[price]', formData.price);
     if (formData.contact_email !== '') data.append('posting[contact_email]', formData.contact_email);
     if (formData.contact_phone !== '') data.append('posting[contact_email]', formData.contact_phone);
-    if (formData.picture) data.append('posting[picture]', formData.picture);
+    if (fileInputRef.current.files.length > 0) data.append('posting[picture]', fileInputRef.current.files[0]);
     submitPosting(data);
-  };
-
-  const selectPicture = event => {
-    setFormData({
-      ...formData,
-      picture: event.target.files[0],
-    });
   };
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <FormControl>
         <InputLabel htmlFor="picture-input">Picture</InputLabel>
-        <input type="file" id="picture-input" value={formData.picture} aria-describedby="my-helper-text" onChange={selectPicture} />
+        <input ref={fileInputRef} type="file" id="picture-input" value={formData.picture} aria-describedby="my-helper-text" />
         <FormHelperText id="my-helper-text">Select a picture for your posting</FormHelperText>
       </FormControl>
       <FormControl>
@@ -78,7 +72,7 @@ const SubmitPostingForm = ({ submitPosting }) => {
         <TextField type="email" className={textFieldClasses.root} variant="outlined" label="Contact email" placeholder="Your contact email (optional)" onChange={e => setFormData({ ...formData, title: e.target.value })} />
       </FormControl>
       <FormControl>
-        <Button className={buttonClasses.root} type="submit">Create posting</Button>
+        <Button disabled={submitStatus === 'submitting'} className={buttonClasses.root} type="submit">Create posting</Button>
       </FormControl>
     </form>
   );
@@ -86,6 +80,7 @@ const SubmitPostingForm = ({ submitPosting }) => {
 
 SubmitPostingForm.propTypes = {
   submitPosting: PropTypes.func.isRequired,
+  submitStatus: PropTypes.string.isRequired,
 };
 
 export default SubmitPostingForm;

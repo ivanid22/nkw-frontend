@@ -5,6 +5,7 @@ import SignInView from './containers/SignInView/SignInView';
 import RouteNotFoundView from './components/RouteNotFoundView/RouteNotFoundView';
 import SignUpView from './containers/SignUpView/SignUpView';
 import PostingsView from './containers/PostingsView/PostingsView';
+import SubmitPostingView from './containers/SubmitPostingView/SubmitPostingView';
 
 function App() {
   return (
@@ -16,6 +17,12 @@ function App() {
           </Route>
           <Route exact path="/sign_up">
             <SignUpView />
+          </Route>
+          <Route exact path="/postings/create">
+            <SubmitPostingView />
+          </Route>
+          <Route exact path="/postings">
+            <PostingsView />
           </Route>
           <Route exact path="/">
             <PostingsView />

@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { PostingsActionType } from '../reducers/postingsReducer';
-import { signOut } from './auth';
+import { ApplicationStateActions } from '../reducers/applicationStateReducer';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const setPostings = postings => ({
   type: PostingsActionType.SET_POSTINGS,
   postings,
+});
+
+const setPostingStatus = status => ({
+  type: ApplicationStateActions.SET_CREATE_POSTING_STATUS,
+  status,
 });
 
 export const startFetchPostings = () => (dispatch, getState) => {
@@ -33,7 +38,8 @@ export const startFetchPostings = () => (dispatch, getState) => {
   });
 };
 
-export const startCreatePosting = data => dispatch => {
+export const startCreatePosting = data => (dispatch, getState) => {
+  dispatch(setPostingStatus('submitting'));
   const { client, accessToken, uid } = getState().auth;
   axios({
     method: 'post',
@@ -43,12 +49,17 @@ export const startCreatePosting = data => dispatch => {
       uid,
       'access-token': accessToken,
       'Content-Type': 'multipart/form-data',
+      Accept: 'application/json',
     },
     data,
   }).then(response => {
     if (response.status === 401) dispatch({ type: 'SIGN_OUT' });
-    else dispatch(startFetchPostings());
+    else {
+      dispatch(setPostingStatus('success'));
+      dispatch(startFetchPostings());
+    }
   }).catch(error => {
+    dispatch(setPostingStatus('error'));
     console.log(error.message);
   });
 };
