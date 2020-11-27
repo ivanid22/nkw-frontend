@@ -28,7 +28,6 @@ const buttonStyles = makeStyles({
 const textfieldStyles = makeStyles({
   root: {
     maxWidth: '480px',
-    borderRadius: '20px',
     border: 'none',
     marginBottom: '1em',
 
