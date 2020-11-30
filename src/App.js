@@ -6,6 +6,7 @@ import RouteNotFoundView from './components/RouteNotFoundView/RouteNotFoundView'
 import SignUpView from './containers/SignUpView/SignUpView';
 import PostingsView from './containers/PostingsView/PostingsView';
 import SubmitPostingView from './containers/SubmitPostingView/SubmitPostingView';
+import PostingView from './containers/PostingView/PostingView';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/postings">
             <PostingsView />
+          </Route>
+          <Route exact path="/postings/:postingId">
+            <PostingView />
           </Route>
           <Route exact path="/">
             <PostingsView />
