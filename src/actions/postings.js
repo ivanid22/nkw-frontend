@@ -9,8 +9,9 @@ export const setPostings = postings => ({
   postings,
 });
 
-const setPostingStatus = status => ({
+const setPostingStatus = (status, postingId) => ({
   type: ApplicationStateActions.SET_CREATE_POSTING_STATUS,
+  postingId,
   status,
 });
 
@@ -55,7 +56,7 @@ export const startCreatePosting = data => (dispatch, getState) => {
   }).then(response => {
     if (response.status === 401) dispatch({ type: 'SIGN_OUT' });
     else {
-      dispatch(setPostingStatus('success'));
+      dispatch(setPostingStatus('success', response.data.id));
       dispatch(startFetchPostings());
     }
   }).catch(error => {

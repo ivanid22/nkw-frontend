@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import {
   FormControl,
   TextField,
-  InputLabel,
   FormHelperText,
   Button,
 } from '@material-ui/core';
@@ -37,10 +36,23 @@ const textfieldStyles = makeStyles({
   },
 });
 
+const formFieldStyles = makeStyles({
+  root: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+
+    '& > *': {
+      width: '100%',
+    },
+  },
+});
+
 const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
   const [formData, setFormData] = useState({});
   const textFieldClasses = textfieldStyles();
   const buttonClasses = buttonStyles();
+  const formFieldClasses = formFieldStyles();
   const fileInputRef = useRef(null);
 
   const onSubmit = event => {
@@ -49,29 +61,34 @@ const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
     data.append('posting[title]', formData.title);
     data.append('posting[description]', formData.description);
     data.append('posting[price]', formData.price);
-    if (formData.contact_email !== '') data.append('posting[contact_email]', formData.contact_email);
-    if (formData.contact_phone !== '') data.append('posting[contact_email]', formData.contact_phone);
+    if (formData.contact_email !== '') data.append('posting[contact_email]', formData.contactEmail);
+    if (formData.contact_phone !== '') data.append('posting[contact_email]', formData.contactPhone);
     if (fileInputRef.current.files.length > 0) data.append('posting[picture]', fileInputRef.current.files[0]);
     submitPosting(data);
   };
 
   return (
     <form className={styles.form} onSubmit={onSubmit}>
-      <FormControl>
-        <InputLabel htmlFor="picture-input">Picture</InputLabel>
+      <FormControl className={formFieldClasses.root}>
         <input ref={fileInputRef} type="file" id="picture-input" value={formData.picture} aria-describedby="my-helper-text" />
         <FormHelperText id="my-helper-text">Select a picture for your posting</FormHelperText>
       </FormControl>
-      <FormControl>
+      <FormControl className={formFieldClasses.root}>
         <TextField type="text" required className={textFieldClasses.root} variant="outlined" label="Title" placeholder="Title for your posting" onChange={e => setFormData({ ...formData, title: e.target.value })} />
       </FormControl>
-      <FormControl>
-        <TextField type="text" required className={textFieldClasses.root} variant="outlined" label="Description" placeholder="Brief description of your posting" onChange={e => setFormData({ ...formData, description: e.target.value })} />
+      <FormControl className={formFieldClasses.root}>
+        <TextField multiline rows={4} type="text" required className={textFieldClasses.root} variant="outlined" label="Description" placeholder="Brief description of your posting" onChange={e => setFormData({ ...formData, description: e.target.value })} />
       </FormControl>
-      <FormControl>
-        <TextField type="email" className={textFieldClasses.root} variant="outlined" label="Contact email" placeholder="Your contact email (optional)" onChange={e => setFormData({ ...formData, title: e.target.value })} />
+      <FormControl className={formFieldClasses.root}>
+        <TextField type="text" required className={textFieldClasses.root} variant="outlined" label="Price" onChange={e => setFormData({ ...formData, price: e.target.value })} />
       </FormControl>
-      <FormControl>
+      <FormControl className={formFieldClasses.root}>
+        <TextField type="email" className={textFieldClasses.root} variant="outlined" label="Contact email" placeholder="Your contact email (optional)" onChange={e => setFormData({ ...formData, contactEmail: e.target.value })} />
+      </FormControl>
+      <FormControl className={formFieldClasses.root}>
+        <TextField type="text" className={textFieldClasses.root} variant="outlined" label="Contact phone" placeholder="Your contact phone (optional)" onChange={e => setFormData({ ...formData, contactPhone: e.target.value })} />
+      </FormControl>
+      <FormControl className={formFieldClasses.root}>
         <Button disabled={submitStatus === 'submitting'} className={buttonClasses.root} type="submit">Create posting</Button>
       </FormControl>
     </form>

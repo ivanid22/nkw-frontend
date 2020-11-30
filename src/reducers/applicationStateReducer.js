@@ -9,6 +9,7 @@ const initialState = {
   userProfile: {},
   activeNavigationSlide: null,
   createPostingStatus: 'idle',
+  createdPostingId: null,
 };
 
 const applicationStateReducer = (state = initialState, action) => {
@@ -32,6 +33,7 @@ const applicationStateReducer = (state = initialState, action) => {
       return {
         ...state,
         createPostingStatus: action.status,
+        createdPostingId: action.postingId ? action.postingId : state.createdPostingId,
       };
     default:
       return state;
