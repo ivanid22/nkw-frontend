@@ -64,3 +64,20 @@ export const startCreatePosting = data => (dispatch, getState) => {
     console.log(error.message);
   });
 };
+
+export const startCreateFavorite = postingId => (dispatch, getState) => {
+  const { client, accessToken, uid } = getState().auth;
+  axios({
+    method: 'post',
+    url: `${API_URL}/v1/favorites`,
+    headers: {
+      client,
+      uid,
+      'access-token': accessToken,
+      Accept: 'application/json',
+    },
+    data: {
+      posting_id: postingId,
+    },
+  }).then(() => dispatch(startFetchPostings()));
+};
