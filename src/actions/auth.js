@@ -79,6 +79,7 @@ export const startSignUp = data => dispatch => {
     },
   }).then(response => {
     dispatch(signIn(processSignInResponse(response)));
+    dispatch(startFetchUserProfile());
     dispatch(startFetchPostings());
   }).catch(error => {
     dispatch(signUpFailed(error.response.data.errors.full_messages.join(', ')));
