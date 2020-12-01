@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { IconButton, Typography } from '@material-ui/core';
-import { FavoriteOutlined, Favorite } from '@material-ui/icons';
+import { FavoriteBorder, Favorite } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { startCreateFavorite } from '../../actions/postings';
@@ -12,6 +12,15 @@ import { postingsFavoritedByUser } from '../../filters/postings';
 
 const pictureUrl = (url = '') => (url ? `http://localhost:3000/${url}` : defaultPicture);
 
+const defaultPosting = {
+  title: 'Title',
+  description: 'Description',
+  favorites: [],
+  contact_email: '',
+  contact_phone: '',
+  picture: '',
+};
+
 const PostingView = ({
   postings,
   addFavorite,
@@ -19,7 +28,7 @@ const PostingView = ({
   uid,
 }) => {
   const { postingId } = useParams();
-  const posting = postings.filter(p => p.id.toString() === postingId)[0] || { picture: '' };
+  const posting = postings.filter(p => p.id.toString() === postingId)[0] || defaultPosting;
   console.log(postings);
 
   console.log('favopostings', favoritedPostings);
@@ -38,6 +47,14 @@ const PostingView = ({
     return (m.length > 0);
   };
 
+  const currentUserOwnsPosting = () => posting.user_profile_id === uid;
+
+  const FavoriteButton = () => (
+    <IconButton disabled={alreadyFavorited()} onClick={onFavoriteButtonClick}>
+      { alreadyFavorited() ? <Favorite /> : <FavoriteBorder /> }
+    </IconButton>
+  );
+
   return (
     <LayoutContainer>
       <div className={styles.postingViewContainer}>
@@ -50,9 +67,7 @@ const PostingView = ({
               { posting.title }
             </Typography>
             <div className={styles.favoriteButtonContainer}>
-              <IconButton disabled={alreadyFavorited()} onClick={onFavoriteButtonClick}>
-                { alreadyFavorited() ? <Favorite /> : <FavoriteOutlined /> }
-              </IconButton>
+              { !currentUserOwnsPosting() ? <FavoriteButton /> : null }
             </div>
           </div>
           <div className={styles.postingDetailsItem}>
