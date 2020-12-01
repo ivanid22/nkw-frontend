@@ -34,6 +34,12 @@ const signUpFailed = error => ({
   error,
 });
 
+const clearLocalStorage = () => {
+  localStorage.setItem('client', null);
+  localStorage.setItem('access-token', null);
+  localStorage.setItem('uid', null);
+};
+
 const processSignInResponse = response => ({
   accessToken: response.headers['access-token'],
   client: response.headers.client,
@@ -79,8 +85,8 @@ export const startSignUp = data => dispatch => {
   });
 };
 
-export const startSignOut = data => dispatch => {
-  const { uid, client, accessToken } = data;
+export const startSignOut = () => (dispatch, getState) => {
+  const { uid, client, accessToken } = getState().auth;
   axios({
     method: 'delete',
     url: `${API_URL}/auth/sign_out`,
@@ -90,9 +96,11 @@ export const startSignOut = data => dispatch => {
       'access-token': accessToken,
     },
   }).then(() => {
+    clearLocalStorage();
     dispatch(signOut());
     dispatch(clearUserProfile());
   }).catch(() => {
+    clearLocalStorage();
     dispatch(clearUserProfile());
     dispatch(signOut());
   });

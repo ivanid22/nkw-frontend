@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Favorite } from '@material-ui/icons';
 import { IconButton, Typography } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import styles from './PostingsListItem.module.scss';
 import defaultPicture from '../../assets/default-posting-picture.png';
 
 const pictureUrl = posting => (posting.picture ? `http://localhost:3000/${posting.picture}` : defaultPicture);
 
 const PostingsListItem = ({ posting }) => {
-  console.log('posting', posting);
+  const history = useHistory();
+
+  const onContainerClick = () => history.push(`/postings/${posting.id}`);
+
   return (
-    <div className={styles.postingsListItemContainer}>
+    <div className={styles.postingsListItemContainer} aria-hidden="true" onClick={() => onContainerClick()}>
       <div className={styles.postingPictureContainer}>
         <img
           className={styles.postingPicture}
@@ -41,6 +45,7 @@ const PostingsListItem = ({ posting }) => {
 
 PostingsListItem.propTypes = {
   posting: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     favorites: PropTypes.arrayOf(
       PropTypes.shape({

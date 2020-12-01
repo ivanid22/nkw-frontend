@@ -7,6 +7,8 @@ import SignUpView from './containers/SignUpView/SignUpView';
 import PostingsView from './containers/PostingsView/PostingsView';
 import SubmitPostingView from './containers/SubmitPostingView/SubmitPostingView';
 import PostingView from './containers/PostingView/PostingView';
+import FavoritesView from './containers/FavoritesView/FavoritesView';
+import UserPostingsView from './containers/UserPostingsView/UserPostingsView';
 
 function App() {
   return (
@@ -25,8 +27,14 @@ function App() {
           <Route exact path="/postings">
             <PostingsView />
           </Route>
+          <Route exact path="/favorites">
+            <FavoritesView />
+          </Route>
           <Route exact path="/postings/:postingId">
             <PostingView />
+          </Route>
+          <Route exact path="/user/postings">
+            <UserPostingsView />
           </Route>
           <Route exact path="/">
             <PostingsView />

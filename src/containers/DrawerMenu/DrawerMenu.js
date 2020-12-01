@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   List, ListItem, ListItemIcon, ListItemText, Drawer,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Favorite, Person, ExitToApp } from '@material-ui/icons';
+import {
+  Favorite,
+  Person,
+  ExitToApp,
+  Add,
+} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import UserAvatar from '../UserAvatar/UserAvatar';
+import { startSignOut } from '../../actions/auth';
 
 const drawerStyles = makeStyles({
   root: {
@@ -16,19 +22,45 @@ const drawerStyles = makeStyles({
   },
 });
 
-const DrawerMenu = ({ open, onClose, userProfile }) => {
+const linkStyles = makeStyles({
+  root: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+});
+
+const DrawerMenu = ({
+  open,
+  onClose,
+  userProfile,
+  authStatus,
+  signOut,
+}) => {
   const drawerClasses = drawerStyles();
+  const linkClasses = linkStyles();
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if ((authStatus !== 'signedIn') && (!['/sign_in', '/sign_up'].includes(location.pathname))) history.push('/sign_in');
+  }, [authStatus]);
 
   const SignoutLink = () => (
-    <ListItem>
+    <ListItem className={linkClasses.root} onClick={() => signOut()}>
       <ListItemIcon>
         <ExitToApp />
       </ListItemIcon>
       <ListItemText>
-        <Link to="/sign_out" style={{ color: 'inherit', textDecoration: 'none' }}>Sign out</Link>
+        Sign out
       </ListItemText>
     </ListItem>
   );
+
+  const onMenuClick = url => {
+    onClose();
+    history.push(url);
+  };
 
   return (
     <Drawer
@@ -47,18 +79,25 @@ const DrawerMenu = ({ open, onClose, userProfile }) => {
     >
       <List>
         { userProfile !== {} ? <UserAvatar userProfile={userProfile} /> : null }
-        <ListItem>
+        <ListItem className={linkClasses.root} onClick={() => onMenuClick('/favorites')}>
           <ListItemIcon>
             <Favorite />
           </ListItemIcon>
           <ListItemText> Favorites </ListItemText>
         </ListItem>
 
-        <ListItem>
+        <ListItem className={linkClasses.root} onClick={() => onMenuClick('/user/postings')}>
           <ListItemIcon>
             <Person />
           </ListItemIcon>
           <ListItemText> Your postings </ListItemText>
+        </ListItem>
+
+        <ListItem className={linkClasses.root} onClick={() => onMenuClick('/postings/create')}>
+          <ListItemIcon>
+            <Add />
+          </ListItemIcon>
+          <ListItemText> Add a posting </ListItemText>
         </ListItem>
 
         { userProfile !== {} ? <SignoutLink /> : null }
@@ -71,10 +110,17 @@ DrawerMenu.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   userProfile: PropTypes.objectOf(PropTypes.string).isRequired,
+  authStatus: PropTypes.string.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   userProfile: state.applicationState.userProfile,
+  authStatus: state.auth.status,
 });
 
-export default connect(mapStateToProps)(DrawerMenu);
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(startSignOut()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerMenu);
