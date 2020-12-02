@@ -3,11 +3,13 @@ export const ApplicationStateActions = {
   SET_ACTIVE_NAVIGATION_SLIDE: 'SET_ACTIVE_NAVIGATION_SLIDE',
   CLEAR_USER_PROFILE: 'CLEAR_USER_PROFILE',
   SET_CREATE_POSTING_STATUS: 'SET_CREATE_POSTING_STATUS',
+  SET_UPDATING_USER_PROFILE_STATUS: 'SET_UPDATING_USER_PROFILE_STATUS',
 };
 
 const initialState = {
   userProfile: {},
   activeNavigationSlide: null,
+  updateUserProfileStatus: 'idle',
   createPostingStatus: 'idle',
   createdPostingId: null,
 };
@@ -34,6 +36,11 @@ const applicationStateReducer = (state = initialState, action) => {
         ...state,
         createPostingStatus: action.status,
         createdPostingId: action.postingId ? action.postingId : state.createdPostingId,
+      };
+    case ApplicationStateActions.SET_UPDATING_USER_PROFILE_STATUS:
+      return {
+        ...state,
+        updateUserProfileStatus: action.status,
       };
     default:
       return state;

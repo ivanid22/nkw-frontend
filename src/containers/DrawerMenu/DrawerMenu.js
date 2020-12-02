@@ -10,6 +10,7 @@ import {
   Person,
   ExitToApp,
   Add,
+  Note,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import UserAvatar from '../../components/UserAvatar/UserAvatar';
@@ -88,7 +89,7 @@ const DrawerMenu = ({
 
         <ListItem className={linkClasses.root} onClick={() => onMenuClick('/user/postings')}>
           <ListItemIcon>
-            <Person />
+            <Note />
           </ListItemIcon>
           <ListItemText> Your postings </ListItemText>
         </ListItem>
@@ -98,6 +99,13 @@ const DrawerMenu = ({
             <Add />
           </ListItemIcon>
           <ListItemText> Add a posting </ListItemText>
+        </ListItem>
+
+        <ListItem className={linkClasses.root} onClick={() => onMenuClick('/user/profile')}>
+          <ListItemIcon>
+            <Person />
+          </ListItemIcon>
+          <ListItemText> Edit your profile </ListItemText>
         </ListItem>
 
         { userProfile !== {} ? <SignoutLink /> : null }

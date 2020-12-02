@@ -9,6 +9,7 @@ import SubmitPostingView from './containers/SubmitPostingView/SubmitPostingView'
 import PostingView from './containers/PostingView/PostingView';
 import FavoritesView from './containers/FavoritesView/FavoritesView';
 import UserPostingsView from './containers/UserPostingsView/UserPostingsView';
+import UpdateUserProfileView from './containers/UpdateUserProfileView/UpdateUserProfileView';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/user/postings">
             <UserPostingsView />
+          </Route>
+          <Route exact path="/user/profile">
+            <UpdateUserProfileView />
           </Route>
           <Route exact path="/">
             <PostingsView />
