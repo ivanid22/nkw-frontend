@@ -5,3 +5,19 @@
   padding: 15px 0;
   width: 100%;
 }
+
+.pictureContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};
+
+.pictureContainer > img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+}
+
+.fileInput {
+  display: none;
+}
