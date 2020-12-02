@@ -12,7 +12,7 @@ import {
   Add,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import UserAvatar from '../UserAvatar/UserAvatar';
+import UserAvatar from '../../components/UserAvatar/UserAvatar';
 import { startSignOut } from '../../actions/auth';
 
 const drawerStyles = makeStyles({
