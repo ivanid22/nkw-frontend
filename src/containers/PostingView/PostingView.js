@@ -30,13 +30,6 @@ const PostingView = ({
 }) => {
   const { postingId } = useParams();
   const posting = postings.filter(p => p.id.toString() === postingId)[0] || defaultPosting;
-  console.log(postings);
-
-  console.log('favopostings', favoritedPostings);
-  console.log('postings', postings);
-  console.log('postingId', postingId);
-  console.log('posting', posting);
-  console.log('uid', uid);
 
   const onFavoriteButtonClick = () => {
     addFavorite(posting.id);
@@ -49,8 +42,6 @@ const PostingView = ({
   };
 
   const currentUserOwnsPosting = () => posting.user_profile_id === uid;
-
-  console.log('currentuserownsposting', currentUserOwnsPosting(), uid, posting.user_profile_id);
 
   const FavoriteButton = () => (
     <IconButton disabled={alreadyFavorited()} onClick={onFavoriteButtonClick}>

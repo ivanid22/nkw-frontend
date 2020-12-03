@@ -50,7 +50,7 @@ const SignUpView = ({ authState, dispatchLogin }) => {
   });
 
   const signingUp = () => authState.status === 'signingUp';
-  const idle = () => ((authState.status === 'signUpFailed') || (authState.status === 'idle'));
+  const idle = () => ((authState.status === 'signUpFailed') || (authState.status === 'idle') || (authState.srarus === 'signInFailed'));
   const renderError = () => (
     authState.error
       ? (
@@ -87,8 +87,9 @@ const SignUpView = ({ authState, dispatchLogin }) => {
               <TextField type="password" required className={textFieldClasses.root} variant="outlined" label="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
               <TextField type="password" required className={textFieldClasses.root} variant="outlined" label="Confirm password" onChange={e => setFormData({ ...formData, password_confirmation: e.target.value })} />
               <Button type="submit" className={buttonClasses.root} disabled={signingUp()}>
-                { idle() ? <Typography variant="button"> Sign in </Typography> : <CircularProgress /> }
+                { idle() ? <Typography variant="button"> Sign up </Typography> : <CircularProgress /> }
               </Button>
+              { !idle() ? <Typography variant="subtitle1">Account creation can take up to 40 seconds</Typography> : null }
               { renderError() }
             </div>
           </form>

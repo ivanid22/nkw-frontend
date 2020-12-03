@@ -85,6 +85,7 @@ const SignInView = ({ authState, dispatchLogin }) => {
               <Button type="submit" className={buttonClasses.root} disabled={signingIn()}>
                 { idle() ? <Typography variant="button"> Sign in </Typography> : <CircularProgress /> }
               </Button>
+              { !idle() ? <Typography variant="subtitle1">Authentication can take up to 40 seconds</Typography> : null }
               { renderError() }
             </div>
           </form>

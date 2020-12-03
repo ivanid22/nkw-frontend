@@ -35,9 +35,9 @@ const signUpFailed = error => ({
 });
 
 const clearLocalStorage = () => {
-  localStorage.setItem('client', null);
-  localStorage.setItem('access-token', null);
-  localStorage.setItem('uid', null);
+  localStorage.removeItem('client');
+  localStorage.removeItem('access-token');
+  localStorage.removeItem('uid');
 };
 
 const processSignInResponse = response => ({
