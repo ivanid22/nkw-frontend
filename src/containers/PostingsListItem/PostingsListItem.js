@@ -36,7 +36,7 @@ const PostingsListItem = ({ posting }) => {
         </div>
         <div className={styles.nameContainer}>
           <Typography variant="h4">{`$ ${posting.price ? posting.price : 0}`}</Typography>
-          <Typography variant="subtitle1"> Negotiable </Typography>
+          <Typography variant="subtitle1"> Listed price </Typography>
         </div>
       </div>
     </div>

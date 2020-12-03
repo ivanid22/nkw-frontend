@@ -14,6 +14,7 @@ import defaultUserImage from '../../assets/default-user-image.png';
 const buttonStyles = makeStyles({
   root: {
     padding: '10px 30px',
+    marginBottom: '1em',
     backgroundColor: '#ff5617',
     color: 'white',
     borderRadius: '25px',

@@ -1,4 +1,12 @@
+body {
+  background: aliceblue;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
+  background-color: #fff;
   margin: 0 auto;
   max-width: 720px;
   display: flex;

@@ -30,6 +30,7 @@ const textfieldStyles = makeStyles({
   root: {
     maxWidth: '480px',
     border: 'none',
+    marginTop: '0.5em',
     marginBottom: '1em',
 
     '& fieldset': {

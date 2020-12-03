@@ -18,11 +18,13 @@ const LayoutContainer = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <Container maxWidth="md" className={styles.root}>
+    <div>
       <ApplicationBar menuOpen={() => setDrawerOpen(!drawerOpen)} />
-      <DrawerMenu open={drawerOpen} onClose={() => setDrawerOpen(false)} container="appContainer" />
-      { children }
-    </Container>
+      <Container maxWidth="md" className={styles.root}>
+        <DrawerMenu open={drawerOpen} onClose={() => setDrawerOpen(false)} container="appContainer" />
+        { children }
+      </Container>
+    </div>
   );
 };
 

@@ -49,9 +49,12 @@ const PostingView = ({
 
   const currentUserOwnsPosting = () => posting.user_profile_id === uid;
 
+  console.log('currentuserownsposting', currentUserOwnsPosting(), uid, posting.user_profile_id);
+
   const FavoriteButton = () => (
     <IconButton disabled={alreadyFavorited()} onClick={onFavoriteButtonClick}>
-      { alreadyFavorited() ? <Favorite /> : <FavoriteBorder /> }
+      { alreadyFavorited() ? <Favorite fontSize="large" /> : <FavoriteBorder fontSize="large" /> }
+      Favorite
     </IconButton>
   );
 
@@ -70,20 +73,25 @@ const PostingView = ({
               { !currentUserOwnsPosting() ? <FavoriteButton /> : null }
             </div>
           </div>
-          <div className={styles.postingDetailsItem}>
-            <Typography variant="h4"> Description </Typography>
+          <div className={styles.postingDescription}>
             <Typography variant="body1">
               { posting.description }
             </Typography>
           </div>
           <div className={styles.postingDetailsItem}>
-            <Typography variant="h4"> Contact phone </Typography>
+            <Typography variant="h5"> Contact phone </Typography>
             <Typography variant="body1">
               { posting.contact_phone ? posting.contact_phone : 'Not specified' }
             </Typography>
           </div>
           <div className={styles.postingDetailsItem}>
-            <Typography variant="h4"> Contact email </Typography>
+            <Typography variant="h5"> Listed price </Typography>
+            <Typography variant="body1">
+              { posting.price ? `$ ${posting.price}` : '$ 0' }
+            </Typography>
+          </div>
+          <div className={styles.postingDetailsItem}>
+            <Typography variant="h5"> Contact email </Typography>
             <Typography variant="body1">
               { posting.contact_email ? posting.contact_email : 'Not specified' }
             </Typography>
