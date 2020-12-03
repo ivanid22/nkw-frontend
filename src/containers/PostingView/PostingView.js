@@ -10,7 +10,8 @@ import styles from './PostingView.module.scss';
 import defaultPicture from '../../assets/default-posting-picture.png';
 import { postingsFavoritedByUser } from '../../filters/postings';
 
-const pictureUrl = (url = '') => (url ? `http://localhost:3000/${url}` : defaultPicture);
+const apiUrl = process.env.REACT_APP_API_URL;
+const pictureUrl = (url = '') => (url ? `${apiUrl}${url}` : defaultPicture);
 
 const defaultPosting = {
   title: 'Title',

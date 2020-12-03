@@ -6,7 +6,9 @@ import { useHistory } from 'react-router-dom';
 import styles from './PostingsListItem.module.scss';
 import defaultPicture from '../../assets/default-posting-picture.png';
 
-const pictureUrl = posting => (posting.picture ? `http://localhost:3000/${posting.picture}` : defaultPicture);
+const url = process.env.REACT_APP_API_URL;
+
+const pictureUrl = posting => (posting.picture ? `${url}${posting.picture}` : defaultPicture);
 
 const PostingsListItem = ({ posting }) => {
   const history = useHistory();
