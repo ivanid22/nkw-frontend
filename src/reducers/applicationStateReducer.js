@@ -6,7 +6,7 @@ export const ApplicationStateActions = {
   SET_UPDATING_USER_PROFILE_STATUS: 'SET_UPDATING_USER_PROFILE_STATUS',
 };
 
-const initialState = {
+export const initialState = {
   userProfile: {},
   activeNavigationSlide: null,
   updateUserProfileStatus: 'idle',
