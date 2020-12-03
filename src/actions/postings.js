@@ -9,7 +9,7 @@ export const setPostings = postings => ({
   postings,
 });
 
-const setPostingStatus = (status, postingId) => ({
+export const setPostingStatus = (status, postingId) => ({
   type: ApplicationStateActions.SET_CREATE_POSTING_STATUS,
   postingId,
   status,

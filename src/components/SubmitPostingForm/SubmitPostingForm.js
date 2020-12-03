@@ -3,6 +3,8 @@ import {
   FormControl,
   TextField,
   Button,
+  CircularProgress,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -64,7 +66,7 @@ const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
     data.append('posting[description]', formData.description);
     data.append('posting[price]', formData.price);
     if (formData.contact_email !== '') data.append('posting[contact_email]', formData.contactEmail);
-    if (formData.contact_phone !== '') data.append('posting[contact_email]', formData.contactPhone);
+    if (formData.contact_phone !== '') data.append('posting[contact_phone]', formData.contactPhone);
     if (fileInputRef.current.files.length > 0) data.append('posting[picture]', fileInputRef.current.files[0]);
     submitPosting(data);
   };
@@ -109,7 +111,9 @@ const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
         <TextField type="text" className={textFieldClasses.root} variant="outlined" label="Contact phone" placeholder="Your contact phone (optional)" onChange={e => setFormData({ ...formData, contactPhone: e.target.value })} />
       </FormControl>
       <FormControl className={formFieldClasses.root}>
-        <Button disabled={submitStatus === 'submitting'} className={buttonClasses.root} type="submit">Create posting</Button>
+        <Button disabled={submitStatus === 'submitting'} className={buttonClasses.root} type="submit">
+          { (submitStatus === 'submitting') ? <CircularProgress /> : <Typography variant="button">Submit</Typography> }
+        </Button>
       </FormControl>
     </form>
   );

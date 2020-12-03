@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { startCreatePosting } from '../../actions/postings';
+import { startCreatePosting, setPostingStatus } from '../../actions/postings';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import SubmitPostingForm from '../../components/SubmitPostingForm/SubmitPostingForm';
 
@@ -11,17 +11,19 @@ const SubmitPostingView = ({
   authStatus,
   submitStatus,
   createdPostingId,
+  updateSubmissionStatus,
 }) => {
   const history = useHistory();
 
   useEffect(() => {
     if (authStatus !== 'signedIn') history.push('/sign_in');
-    console.log(createdPostingId);
   });
 
   useEffect(() => {
-    if (submitStatus === 'success') history.push(`/postings/${createdPostingId}`);
-    console.log('submitStatus hook');
+    if (submitStatus === 'success') {
+      history.push(`/postings/${createdPostingId}`);
+      updateSubmissionStatus();
+    }
   }, [submitStatus]);
 
   return (
@@ -36,6 +38,7 @@ SubmitPostingView.propTypes = {
   authStatus: PropTypes.string.isRequired,
   submitStatus: PropTypes.string.isRequired,
   createdPostingId: PropTypes.string.isRequired,
+  updateSubmissionStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -46,6 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   submitPosting: data => dispatch(startCreatePosting(data)),
+  updateSubmissionStatus: () => dispatch(setPostingStatus('idle')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitPostingView);

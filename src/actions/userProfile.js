@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ApplicationStateActions } from '../reducers/applicationStateReducer';
 import { startFetchUserProfile } from './applicationState';
 
-const setUpdateUserProfileStatus = status => ({
+export const setUpdateUserProfileStatus = status => ({
   type: ApplicationStateActions.SET_UPDATING_USER_PROFILE_STATUS,
   status,
 });

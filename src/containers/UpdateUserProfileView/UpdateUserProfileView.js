@@ -4,13 +4,21 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import UserProfileForm from '../../components/UserProfileForm/UserProfileForm';
-import { startUpdateUserProfile } from '../../actions/userProfile';
+import { startUpdateUserProfile, setUpdateUserProfileStatus } from '../../actions/userProfile';
 
-const UpdateUserProfileView = ({ submitStatus, userProfile, updateProfile }) => {
+const UpdateUserProfileView = ({
+  submitStatus,
+  userProfile,
+  updateProfile,
+  updateSubmissionStatus,
+}) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (submitStatus === 'success') history.push('/');
+    if (submitStatus === 'success') {
+      history.push('/');
+      updateSubmissionStatus();
+    }
   }, [submitStatus]);
 
   return (
@@ -27,11 +35,13 @@ const UpdateUserProfileView = ({ submitStatus, userProfile, updateProfile }) => 
 UpdateUserProfileView.propTypes = {
   submitStatus: PropTypes.string.isRequired,
   userProfile: PropTypes.objectOf(PropTypes.string).isRequired,
+  updateSubmissionStatus: PropTypes.func.isRequired,
   updateProfile: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   updateProfile: data => dispatch(startUpdateUserProfile(data)),
+  updateSubmissionStatus: () => dispatch(setUpdateUserProfileStatus('idle')),
 });
 
 const mapStateToProps = state => ({
