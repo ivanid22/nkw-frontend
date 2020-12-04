@@ -3,6 +3,9 @@
 A React/Redux application that lets users create and share classified ads for sales. Users can also set postings as favorites, so they can find them later easily.
 This is the front-end portion of the application. In order for it to work, it needs to be connected to a backend.
 
+## Backend repository
+You can find the repository for the backend server software for this application [HERE](https://github.com/ivanid22/nkw-backend)
+
 ![index](./capture-1.PNG)
 
 ![detail](./capture-2.PNG)
