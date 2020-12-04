@@ -11,6 +11,7 @@ import {
   ExitToApp,
   Add,
   Note,
+  StarHalfSharp,
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import UserAvatar from '../../components/UserAvatar/UserAvatar';
@@ -80,6 +81,13 @@ const DrawerMenu = ({
     >
       <List>
         { userProfile !== {} ? <UserAvatar userProfile={userProfile} /> : null }
+        <ListItem className={linkClasses.root} onClick={() => onMenuClick('/')}>
+          <ListItemIcon>
+            <StarHalfSharp />
+          </ListItemIcon>
+          <ListItemText> Index </ListItemText>
+        </ListItem>
+
         <ListItem className={linkClasses.root} onClick={() => onMenuClick('/favorites')}>
           <ListItemIcon>
             <Favorite />
