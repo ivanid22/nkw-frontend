@@ -29,7 +29,7 @@ const signingUp = () => ({
   type: AuthActionType.SIGNING_UP,
 });
 
-const signUpFailed = error => ({
+export const signUpFailed = error => ({
   type: AuthActionType.SIGN_UP_FAILED,
   error,
 });
