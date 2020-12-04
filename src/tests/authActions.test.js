@@ -1,4 +1,9 @@
-import { signOut, signIn, signInFailed, signUpFailed } from '../actions/auth';
+import {
+  signOut,
+  signIn,
+  signInFailed,
+  signUpFailed,
+} from '../actions/auth';
 import { AuthActionType } from '../reducers/authReducer';
 
 describe('auth actions', () => {
@@ -33,5 +38,4 @@ describe('auth actions', () => {
       error: 'test error',
     });
   });
-
 });

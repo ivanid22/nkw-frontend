@@ -27,14 +27,12 @@ export const startFetchPostings = () => (dispatch, getState) => {
       Accept: 'application/json',
     },
   }).then(response => {
-    console.log('response ', response);
     if (response.status === '401') {
       dispatch({ type: 'SIGN_IN_FAILED', error: response.data });
     } else {
       dispatch(setPostings(response.data));
     }
   }).catch(error => {
-    console.log('error', error);
     dispatch({ type: 'SIGN_IN_FAILED', error: error.message });
   });
 };
@@ -59,9 +57,8 @@ export const startCreatePosting = data => (dispatch, getState) => {
       dispatch(setPostingStatus('success', response.data.id));
       dispatch(startFetchPostings());
     }
-  }).catch(error => {
+  }).catch(() => {
     dispatch(setPostingStatus('error'));
-    console.log(error.message);
   });
 };
 

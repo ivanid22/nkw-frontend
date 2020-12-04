@@ -68,8 +68,6 @@ const UserProfileForm = ({ userProfile, submitForm, submitStatus }) => {
     if (fileInputRef.current.files.length > 0) {
       previewReader.readAsDataURL(fileInputRef.current.files[0]);
     }
-    console.log(fileInputRef.current.files[0]);
-    console.log(avatar);
   };
 
   previewReader.addEventListener('load', () => {

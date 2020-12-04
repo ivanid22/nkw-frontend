@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducers from './reducers/index';
-// import './index.css';
 import App from './App';
 import { signIn } from './actions/auth';
 import reportWebVitals from './reportWebVitals';
@@ -34,7 +33,6 @@ const storeAuthTokens = () => {
 };
 
 store.subscribe(() => {
-  console.log(store.getState());
   storeAuthTokens();
 });
 
