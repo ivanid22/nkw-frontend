@@ -4,7 +4,7 @@ import { IconButton, Typography } from '@material-ui/core';
 import { FavoriteBorder, Favorite } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { startCreateFavorite } from '../../actions/postings';
+import { startCreateFavorite } from '../../actions/api';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import styles from './PostingView.module.scss';
 import defaultPicture from '../../assets/default-posting-picture.png';

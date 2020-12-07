@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import UserProfileForm from '../../components/UserProfileForm/UserProfileForm';
-import { startUpdateUserProfile, setUpdateUserProfileStatus } from '../../actions/userProfile';
+import { setUpdateUserProfileStatus } from '../../actions/userProfile';
+import { startUpdateUserProfile } from '../../actions/api';
 
 const UpdateUserProfileView = ({
   submitStatus,

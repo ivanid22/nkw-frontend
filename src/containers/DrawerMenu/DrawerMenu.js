@@ -15,7 +15,7 @@ import {
 } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import UserAvatar from '../../components/UserAvatar/UserAvatar';
-import { startSignOut } from '../../actions/auth';
+import { startSignOut } from '../../actions/api';
 
 const drawerStyles = makeStyles({
   root: {

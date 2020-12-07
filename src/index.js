@@ -7,8 +7,7 @@ import reducers from './reducers/index';
 import App from './App';
 import { signIn } from './actions/auth';
 import reportWebVitals from './reportWebVitals';
-import { startFetchPostings } from './actions/postings';
-import { startFetchUserProfile } from './actions/applicationState';
+import { startFetchPostings, startFetchUserProfile } from './actions/api';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

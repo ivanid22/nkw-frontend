@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { startCreatePosting, setPostingStatus } from '../../actions/postings';
+import { setPostingStatus } from '../../actions/postings';
+import { startCreatePosting } from '../../actions/api';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import SubmitPostingForm from '../../components/SubmitPostingForm/SubmitPostingForm';
 

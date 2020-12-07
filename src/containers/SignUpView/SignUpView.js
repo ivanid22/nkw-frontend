@@ -6,7 +6,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { startSignUp } from '../../actions/auth';
+import { startSignUp } from '../../actions/api';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import styles from './SignUpView.module.scss';
 
