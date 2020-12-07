@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { startSignUp } from '../../actions/api';
 import LayoutContainer from '../../components/LayoutContainer/LayoutContainer';
 import styles from './SignUpView.module.scss';
+import { signOut, clearLocalStorage } from '../../actions/auth';
 
 const buttonStyles = makeStyles({
   root: {
@@ -38,7 +39,11 @@ const textfieldStyles = makeStyles({
   },
 });
 
-const SignUpView = ({ authState, dispatchLogin }) => {
+const SignUpView = ({
+  authState,
+  dispatchLogin,
+  clearAuthState,
+}) => {
   const history = useHistory();
   const buttonClasses = buttonStyles();
   const textFieldClasses = textfieldStyles();
@@ -71,6 +76,10 @@ const SignUpView = ({ authState, dispatchLogin }) => {
 
   useEffect(() => {
     if (authState.status === 'signedIn') history.push('/');
+    if (authState.status === 'signInFailed') {
+      clearAuthState();
+      clearLocalStorage();
+    }
   });
 
   return (
@@ -106,6 +115,7 @@ const SignUpView = ({ authState, dispatchLogin }) => {
 SignUpView.propTypes = {
   authState: PropTypes.objectOf(PropTypes.string).isRequired,
   dispatchLogin: PropTypes.func.isRequired,
+  clearAuthState: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -114,6 +124,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dispatchLogin: data => dispatch(startSignUp(data)),
+  clearAuthState: () => dispatch(signOut()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpView);

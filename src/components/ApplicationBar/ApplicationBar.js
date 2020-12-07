@@ -27,7 +27,7 @@ const ApplicationBar = ({ menuOpen }) => {
 
   const shouldRender = () => {
     const location = useLocation();
-    return ((location.pathname !== '/sign_in') && (location.pathname !== 'sign_up'));
+    return ((location.pathname !== '/sign_in') && (location.pathname !== '/sign_up'));
   };
 
   const renderBar = () => (
