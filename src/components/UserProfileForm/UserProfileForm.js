@@ -53,7 +53,11 @@ const formFieldStyles = makeStyles({
 
 const url = process.env.REACT_APP_API_URL;
 
-const UserProfileForm = ({ userProfile, submitForm, submitStatus }) => {
+const UserProfileForm = ({
+  userProfile,
+  submitForm,
+  submitStatus,
+}) => {
   const textFieldClasses = textfieldStyles();
   const formFieldClasses = formFieldStyles();
   const buttonClasses = buttonStyles();

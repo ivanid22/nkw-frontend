@@ -51,7 +51,10 @@ const formFieldStyles = makeStyles({
   },
 });
 
-const SubmitPostingForm = ({ submitPosting, submitStatus }) => {
+const SubmitPostingForm = ({
+  submitPosting,
+  submitStatus,
+}) => {
   const [formData, setFormData] = useState({});
   const [picture, setPicture] = useState(null);
   const textFieldClasses = textfieldStyles();

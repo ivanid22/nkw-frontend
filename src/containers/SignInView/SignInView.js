@@ -37,7 +37,10 @@ const textfieldStyles = makeStyles({
   },
 });
 
-const SignInView = ({ authState, dispatchLogin }) => {
+const SignInView = ({
+  authState,
+  dispatchLogin,
+}) => {
   const history = useHistory();
   const buttonClasses = buttonStyles();
   const textFieldClasses = textfieldStyles();
