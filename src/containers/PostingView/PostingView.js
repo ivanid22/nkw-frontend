@@ -73,7 +73,7 @@ const PostingView = ({
           <div className={styles.postingDetailsItem}>
             <Typography variant="h5"> Contact phone </Typography>
             <Typography variant="body1">
-              { posting.contact_phone ? posting.contact_phone : 'Not specified' }
+              { posting.contact_phone !== 'undefined' ? posting.contact_phone : 'Not specified' }
             </Typography>
           </div>
           <div className={styles.postingDetailsItem}>
@@ -85,7 +85,7 @@ const PostingView = ({
           <div className={styles.postingDetailsItem}>
             <Typography variant="h5"> Contact email </Typography>
             <Typography variant="body1">
-              { posting.contact_email ? posting.contact_email : 'Not specified' }
+              { posting.contact_email !== 'undefined' ? posting.contact_email : 'Not specified' }
             </Typography>
           </div>
         </div>
