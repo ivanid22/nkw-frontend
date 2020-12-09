@@ -1,0 +1,28 @@
+.postingViewContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.postingImage {
+  max-width: 100%;
+}
+
+.postingTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postingDescription {
+  margin-top: 1em;
+  align-self: flex-start;
+  margin-bottom: 2em;
+}
+
+.postingDetailsItem {
+  display: flex;
+  margin-top: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+}

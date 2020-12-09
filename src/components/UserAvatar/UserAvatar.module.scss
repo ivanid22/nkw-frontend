@@ -1,0 +1,17 @@
+.userAvatarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userPicture {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
